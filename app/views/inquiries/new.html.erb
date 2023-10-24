@@ -1,0 +1,63 @@
+<%= javascript_include_tag('new.js')%>
+
+
+<h1> New Applicant </h1>
+  <%= form_with model: @inquiry do |form| %>
+    <div>
+      <%= form.label :fname, "Your first name" %><br>
+      <%= form.text_field :fname %><br>
+      <% @inquiry.errors.full_messages_for(:fname).each do |message|%>
+        <div> <%=message%> </div>
+        <%end %>
+    </div>
+
+
+    <div>
+      <%= form.label :lname, "Your last name" %> <br>
+      <%= form.text_field :lname %><br>
+      <% @inquiry.errors.full_messages_for(:lname).each do |message| %>
+        <div> <%=message%> </div>
+      <% end %>
+    </div>
+    <br>
+
+    <div>
+      <%=form.label :mname, "Your middle name (if applicable)" %> <br>
+      <%= form.text_field :mname %><br>
+       <% @inquiry.errors.full_messages_for(:lname).each do |message| %>
+        <div> <%=message%> </div>
+      <% end %>   
+    </div>
+    <div>
+        <p> "Are you a Canadian Citizen?" </p>
+        <%= form.radio_button :is_Canadian, "1" %>
+        <%= form.label :is_Canadian, "I am a Canadian Citizen"%>
+        <br>
+        <div>
+          <%= form.radio_button :is_Canadian, "0" %>
+          <%= form.label :is_Canadian, "I am not a Canadian Citizen"%>
+          <br>
+          <div id = "english-test-written" style = "display: none">
+           <%= form.label :english_written_test, "Have you completed a recognized Enlish test?" %>
+           <%=form.text_field :english_written_test %>
+          </div>
+        </div>
+    <br>
+    <div>
+      <h2> Personal Items </h2>
+      <%= form.label :aboutMe, "Who are you? Tell us about yourself!" %>
+      <br>
+      <%= form.text_field :aboutMe %>
+    </div>
+
+    <div>
+      <%= form.label :file, style: "display: block"%>
+      <%= form.file_field :file %>
+    </div>
+  </div>
+  <br>
+    <div>
+      <%=form.submit%>
+    </div>
+<% end %>
+

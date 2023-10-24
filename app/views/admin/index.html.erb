@@ -1,0 +1,20 @@
+<%=stylesheet_link_tag 'admin'%>
+<h1> admin view wip </h2>
+
+<h4> Applications: </h4>
+
+<table>
+  <tr>
+    <th>ID #</th>
+    <th>First Name </th>
+    <th>Last Name </th>
+  </tr>
+  <tr>
+  <% @inquiries.each do |inquiry| %>
+    <td><%= link_to inquiry.id, inquiry%></td>
+    <td><%= inquiry.fname%></td>
+    <td><%= inquiry.lname%></td>
+  </tr>
+    
+  <%end%>
+</table>

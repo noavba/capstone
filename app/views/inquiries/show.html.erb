@@ -1,0 +1,26 @@
+<h1> Thank you for applying </h1>
+<p>Dear <%= @inquiry.fname%>, We have received your application and you will be contacted if further information is needed!
+</p>
+
+<br>
+
+<p> fields testing </p>
+
+<br>
+<p>
+  <p> middle name: </p>
+  <%= @inquiry.mname%>
+  <br>
+  <p> last name: </p>
+  <%= @inquiry.lname%>
+  <br>
+  <p> canadian citizen </p>
+  <%= @inquiry.is_Canadian%>
+  <br>
+  <% if @inquiry.file.attached? %>
+    <div>
+      <%= link_to @inquiry.file.filename, url_for(@inquiry.file)%>
+    </div>
+  <%end%>
+
+</p>

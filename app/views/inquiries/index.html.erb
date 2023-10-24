@@ -1,0 +1,11 @@
+<h1> Inquiry (Application Location) </h1>
+
+<ul>
+  <% @inquiries.each do |inquiry| %>
+    <li>
+      <%= link_to inquiry.fname, inquiry%>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "New Applicant", new_inquiry_path %>
