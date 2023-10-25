@@ -1,4 +1,4 @@
-<%= javascript_include_tag('new.js')%>
+gi<%= javascript_include_tag('new.js')%>
 
 
 <h1> New Applicant </h1>
@@ -42,7 +42,17 @@
            <%=form.text_field :english_written_test %>
           </div>
         </div>
+    </div>
     <br>
+    <br>
+    <div>
+      <h1 style="font-style: italic">Education</h1>
+      <h3>First Education</h3>
+      <div>
+
+
+      </div>
+    </div>
     <div>
       <h2> Personal Items </h2>
       <%= form.label :aboutMe, "Who are you? Tell us about yourself!" %>
@@ -54,7 +64,6 @@
       <%= form.label :file, style: "display: block"%>
       <%= form.file_field :file %>
     </div>
-  </div>
   <br>
     <div>
       <%=form.submit%>

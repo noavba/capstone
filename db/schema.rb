@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_22_221511) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_24_234430) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -48,6 +48,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_22_221511) do
     t.string "mname"
     t.text "aboutMe"
     t.text "written_english_test"
+    t.date "DOB"
+    t.boolean "education_one"
+    t.string "education_one_level"
+    t.date "education_one_start_date"
+    t.date "education_one_end_date"
+    t.string "education_one_degree_name"
+    t.string "education_one_school_name"
+    t.decimal "education_one_gpa", precision: 10
+    t.boolean "education_two"
+    t.string "education_two_level"
+    t.date "education_two_start_date"
+    t.date "education_two_end_date"
+    t.string "education_two_degree_name"
+    t.string "education_two_school_name"
+    t.decimal "education_two_gpa", precision: 10
+    t.boolean "education_three"
+    t.string "education_three_level"
+    t.date "education_three_start_date"
+    t.date "education_three_end_date"
+    t.string "education_three_degree_name"
+    t.string "education_three_school_name"
+    t.decimal "education_three_gpa", precision: 10
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
