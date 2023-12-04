@@ -1,4 +1,5 @@
 # README
+Please view raw text for formatting, thank you
 Welcome to Easeply, this document will tell you how to start and run this application
 
 1. You must have ruby installed on your system;
