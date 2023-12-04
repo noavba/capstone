@@ -7,7 +7,7 @@ Welcome to Easeply, this document will tell you how to start and run this applic
 2. You must install Ruby on Rails
   https://guides.rubyonrails.org/v5.1/getting_started.html
   If you have ruby installed, you can use in terminal
-  |gem install ruby|
+   gem install rails
 
 3. You must have atleast MySQL 3 (I HAVE MYSQL 8) or above server installed on your machine
   https://dev.mysql.com/downloads/installer/
