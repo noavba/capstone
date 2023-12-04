@@ -1,20 +1,333 @@
 <%=stylesheet_link_tag 'admin'%>
-<h1> admin view wip </h2>
+<body class = "bg-light">
+<!-- DISPLAY HEIGHT 100 -->
+<div class = "h-100 ms-2">
+  <div class = "row h-100">
+    <div class = "main-content">
 
-<h4> Applications: </h4>
+      <p class ="fw-bold h2 border-bottom">Received Applications</p>
+      <!-- Creates a table of all inquiries and creates a modal to show the data -->
+      <table id = "inquiries-table" class = "table table-borderless">
+        <thead>
+        <tr>
+          <th>ID #</th>
+          <th>User Id</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>First Name </th>
+          <th>Last Name </th>
+          <th> Inquiry Link</th>
+          <th> View Parsed Text</th>
+        </tr>
+        </thead>
+        <tbody>
 
-<table>
-  <tr>
-    <th>ID #</th>
-    <th>First Name </th>
-    <th>Last Name </th>
-  </tr>
-  <tr>
-  <% @inquiries.each do |inquiry| %>
-    <td><%= link_to inquiry.id, inquiry%></td>
-    <td><%= inquiry.fname%></td>
-    <td><%= inquiry.lname%></td>
-  </tr>
-    
-  <%end%>
-</table>
+        <% @inquiries.each do |inquiry| %>
+          <tr class = "item-row">
+            <td data-search="<%=inquiry.id %>"><%=inquiry.id%></td>
+            <td data-search = "<%=inquiry.user_id %>"> <%= inquiry.user_id%></td>
+            <!-- Safe navigation, if inquiry does not have a username it won't throw an error-->
+            <td data-search="<%=inquiry.user.username %>"> <%= inquiry.user&.username %></td>
+            <td data-search = "<%=inquiry.user.email %>"> <%=inquiry.user&.email %></td>
+            <td data-search = "<%= inquiry.fname%>"><%= inquiry.fname%></td>
+            <td data-search = "<%= inquiry.fname%>"><%= inquiry.lname%></td>
+            <td>
+              <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#inquiryModal<%=inquiry.id %>">
+                View Inquiry
+              </button>
+              <!-- Modal  CODE - I TRIED TO USE A PARTIAL BUT IT WOULDNT WORK, MODEL WOULDNT COMMUNICATE TO IT.-->
+              <div class="modal modal-lg fade" id="inquiryModal<%=inquiry.id %>" tabindex="-1" aria-labelledby="inquiryModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="inquiryModalLabel"><%=inquiry.fname %> <%=inquiry.lname %>'s Application</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                      <div class="border row">
+
+                        <div class = "col-6">
+                          <p class = "fw-bold h2"> Basic Information</p>
+                          <p>
+                            First name: <%=inquiry.fname %>
+                            <br>
+                            Last name: <%=inquiry.lname %>
+                            <br>
+                            Middle Name: <%= inquiry.mname %>
+                            <br>
+                            Date of Birth: <%= inquiry.DOB.strftime('%B %d, %Y') if inquiry.DOB %>
+                          </p>
+                        </div>
+
+                      <div class = "col-6 border-left">
+                        <div>
+                          <p  class = "h2 fw-bold">First Education</p>
+                          <div>
+                            <p>
+                              Educational Level: <%=inquiry&.education_one_level %>
+                              <br>
+                              Degree: <%=inquiry&.education_one_degree_name %>
+                              <br>
+                              School name: <%=inquiry&.education_one_school_name %>
+                              <br>
+                              GPA: <%=inquiry&.education_one_gpa %>
+                              <br>
+                              Start date: <%= inquiry&.education_one_start_date.strftime('%B %d, %Y') if inquiry.education_one_start_date %>
+                              <br>
+                              End date: <%= inquiry&.education_one_end_date.strftime('%B %d, %Y') if inquiry.education_one_end_date %>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                        <div class = "col-6 border-left">
+                          <div>
+                            <p  class = "h2 fw-bold">Second Education</p>
+                            <div>
+                              <p>
+                                Educational Level: <%=inquiry&.education_two_level %>
+                                <br>
+                                Degree: <%=inquiry&.education_two_degree_name %>
+                                <br>
+                                School name: <%=inquiry&.education_two_school_name %>
+                                <br>
+                                GPA: <%=inquiry&.education_two_gpa %>
+                                <br>
+                                Start date: <%= inquiry&.education_two_start_date.strftime('%B %d, %Y') if inquiry.education_two_start_date %>
+                                <br>
+                                End date: <%= inquiry&.education_two_end_date.strftime('%B %d, %Y') if inquiry.education_two_end_date %>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class = "col-6 border-left">
+                          <div>
+                            <p  class = "h2 fw-bold">Third Education</p>
+                            <div>
+                              <p>
+                                Educational Level: <%=inquiry&.education_three_level %>
+                                <br>
+                                Degree: <%=inquiry&.education_three_degree_name %>
+                                <br>
+                                School name: <%=inquiry&.education_three_school_name %>
+                                <br>
+                                GPA: <%=inquiry&.education_three_gpa %>
+                                <br>
+                                Start date: <%= inquiry&.education_three_start_date.strftime('%B %d, %Y') if inquiry.education_three_start_date %>
+                                <br>
+                                End date: <%= inquiry&.education_three_end_date.strftime('%B %d, %Y') if inquiry.education_three_end_date %>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      <div class = "col-6">
+                        <div>
+                          <p  class = "mb-2 h3 fw-bold">Additional Information</p>
+                          <div>
+                            <label class="form-label">Skills: <%=inquiry&.skills %></label>
+                          </div>
+                          <div>
+                            <label class="form-label">Interests: <%=inquiry&.interests%></label>
+                          </div>
+                          <div>
+                            <label class = "form-label">Personal Statement: <%=inquiry&.aboutMe %></label>
+                          </div>
+                        </div>
+                      </div>
+                        <div class = "col-6 border-left">
+                          <p class = "mb-2 h3 fw-bold"> Work Experience</p>
+                          <div>
+                            <p>Job Title: <%=inquiry&.job_role %>
+                              <br>
+                              Job Description: <%=inquiry&.job_description %>
+                              <br>
+                              Start date: <%= inquiry&.job_experience_one_start_date.strftime('%B %d, %Y') if inquiry.job_experience_one_start_date %>
+                              <br>
+                              End date: <%= inquiry&.job_experience_one_end_date.strftime('%B %d, %Y') if inquiry.job_experience_one_end_date%>
+                            </p>
+                          </div>
+                        </div>
+
+                      <div class = "mb-2">
+                        <div class = "mb-2 fw-bold">
+                          <div>
+                            <!-- NEED TO FINISH AND IMPLEMENT LOGIC -->
+                            <% if inquiry.resume.attached? %>
+                              <p><strong>Resume:</strong> <%= link_to inquiry.resume.filename, rails_blob_path(inquiry.resume, disposition: "attachment") %></p>
+                            <% else %>
+                              <p>No resume attached.</p>
+                            <% end %>
+
+                            <% if inquiry.cv_letter.attached? %>
+                              <p><strong>Cover Letter:</strong> <%= link_to inquiry.cv_letter.filename, rails_blob_path(inquiry.cv_letter, disposition: "attachment") %></p>
+                            <% else %>
+                              <p>No cover letter attached.</p>
+                            <% end %>
+                            <% if inquiry.transcript.attached? %>
+                              <p><strong>Transcript:</strong> <%= link_to inquiry.transcript.filename, rails_blob_path(inquiry.transcript, disposition: "attachment") %></p>
+                            <% else %>
+                              <p>No transcript attached.</p>
+                            <% end %>
+
+                            <% if inquiry.english_test.attached? %>
+                              <p><strong>English Test:</strong> <%= link_to inquiry.english_test.filename, rails_blob_path(inquiry.english_test, disposition: "attachment") %></p>
+                            <% else %>
+                              <p>No English test attached.</p>
+                            <% end %>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type ="button" class = "btn btn-dark"><a href="mailto:<%=inquiry.user&.email%>" style = "text-decoration: none;">Email Applicant</a></button>
+                      <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </td>
+            <td class = "text-center">
+              <button type = "button" class = "btn btn-dark text-center" data-bs-toggle = "modal" data-bs-target="#parsedModal<%=inquiry.id %>">
+                View Text
+              </button>
+              <div class="modal modal-lg fade" id="parsedModal<%=inquiry.id %>">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Parsed Text</h4>
+                      <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                      <div class = "border mb-2">
+                      <span class = "h3 fw-bold"> Resume Text</span>
+                        <div>
+                        <% if inquiry.resume.attached? %>
+                          <%=Inquiry.extract_text_from_pdf(inquiry.resume) %>
+                        <% else %>
+                          <p>No resume attached.</p>
+                        <% end %>
+                        </div>
+                      </div>
+                      <div class = "border mb-2">
+                        <span class = "h3 fw-bold"> CV Letter Text</span>
+                        <div>
+                          <% if inquiry.cv_letter.attached? %>
+                            <%=Inquiry.extract_text_from_pdf(inquiry.cv_letter) %>
+                          <% else %>
+                            <p>No CV_LETTER attached.</p>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class = "border mb-2">
+                        <span class = "h3 fw-bold"> Transcript Text</span>
+                        <div>
+                          <% if inquiry.transcript.attached? %>
+                            <%=Inquiry.extract_text_from_pdf(inquiry.transcript) %>
+                          <% else %>
+                            <p>No resume attached.</p>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class = "border mb-2">
+                        <span class = "h3 fw-bold"> English Test Text</span>
+                        <div>
+                          <% if inquiry.english_test.attached? %>
+                            <%=Inquiry.extract_text_from_pdf(inquiry.english_test) %>
+                          <% else %>
+                            <p>No english test attached.</p>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <%end%>
+          </tbody>
+      </table>
+    </div>
+    <div class = "sidebar">
+      <div>
+        <div class = "border mt-5 me-3 ">
+          <label for="searchInput" class="form-label">Search Users </label>
+          <input type="text" class="form-control mb-6" id="searchInput" placeholder="Search Users">
+          <div>
+            <label for="searchInput2" class="form-label mt-6">Search Resume, CV, & Transcript</label>
+            <input type="text" class="form-control" id="searchInput2" placeholder="Skills Search">
+            <div>
+              <button class = "btn btn-dark mt-2 mb-2 ms-4"> Search Parsed Text</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<style>
+    .main-content {
+        width: 80%;
+    }
+
+    .sidebar {
+        width: 20%;
+    }
+</style>
+<script>
+    $(document).ready(function(){
+        $("#searchInput").on("input", function(){
+            //defining search term to lowercase (value is in the search bar)
+            const searchTerm = $(this).val().toLowerCase();
+            $(".item-row").each(function() {
+                //This only picks the first 6 columns in a row (td:lt6) makes it so that its more optimized and easier to search
+                const cells = $(this).find("td:lt(6)");
+                    //takes the text from the first 5 cells and concatenates them together
+                    const rowText = cells.map(function(){
+                        return $(this).text().toLowerCase();
+
+                    }).get().join(' ');
+                    //if search term is in the row, hide everything else
+                    const foundTerm = rowText.includes(searchTerm);
+
+                    $(this).toggle(foundTerm);
+            });
+        });
+
+
+
+        //To search the skills/interest/resume/cv/transcript, i just modified the above code
+        $("#searchInput2").on("input", function(){
+            //defining search term to lowercase (value is in the search bar)
+            const searchTerm2 = $(this).val().toLowerCase();
+            $(".item-row").each(function() {
+                //This only picks the first 6 columns in a row (td:gt(5)) makes it so it searches only index greater than 5
+                const cells = $(this).find("td:gt(5)");
+                //takes the text from the last 3 and concatenates them together
+                const rowText = cells.map(function(){
+                    return $(this).text().toLowerCase();
+                }).get().join(' ');
+                //if search term is in the row, hide everything else
+                const foundTerm2 = rowText.includes(searchTerm2);
+
+                $(this).toggle(foundTerm2);
+            });
+        });
+    });
+</script>
+</body>

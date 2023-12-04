@@ -1,0 +1,22 @@
+
+<!-- NOT USED ANYMORE, SAVING FOR REFERENCE-->
+<div class="modal fade" id="inquiryModal" tabindex="-1" aria-labelledby="inquiryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="inquiryModalLabel">Student Application</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%if @inquiry %>
+         <p>First Name: <%=@inquiry.fname %></p>
+          <p>Last name: <%=@inquiry.lname %></p>
+        <%end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

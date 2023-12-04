@@ -27,7 +27,24 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+#Jquery gem
 gem "jquery-rails"
+
+# Bootstrap Gem
+gem "bootstrap"
+
+gem "sassc-rails"
+
+gem "bcrypt"
+
+
+# pdf-reader gem
+gem "pdf-reader"
+
+# active_storage validating (sanitize user input)
+gem "active_storage_validations"
+
+gem "stringio"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

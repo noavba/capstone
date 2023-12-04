@@ -1,72 +1,360 @@
-gi<%= javascript_include_tag('new.js')%>
+<%= javascript_include_tag('new.js')%>
 
+<div class = "d-flex h-100">
+  <div class="flex-shrink-0 p-3" style="width: 200px; background-color: #f8f9fa;">
+    <!-- Content for the slim box goes here -->
+    <h3>Quick Navigation</h3>
+    <ul>
+      <li>
+        <a href = "#basic-info-section">Basic Info</a>
+      </li>
+      <li>
+        <a href = "#education-history-section">Education History</a>
+      </li>
+      <li>
+        <a href = "#work-history-section">Work History</a>
+      </li>
+      <li>
+        <a href = "#additional-information-section">Additional Information</a>
+      </li>
+      <li>
+        <a href = "#file-upload-section">File upload</a>
+      </li>
+    </ul>
+  </div>
 
-<h1> New Applicant </h1>
-  <%= form_with model: @inquiry do |form| %>
-    <div>
-      <%= form.label :fname, "Your first name" %><br>
-      <%= form.text_field :fname %><br>
-      <% @inquiry.errors.full_messages_for(:fname).each do |message|%>
-        <div> <%=message%> </div>
-        <%end %>
-    </div>
+  <div class ="flex-grow-1 p-3">
+    <p class = "h1 fw-bold border-bottom w-50"> New Application!</p>
+    <%= form_with model: @inquiry do |form| %>
+    <%= form.hidden_field :user_id, value: Current.user.id %>
+      <div id = "basic-info-section">
+        <p class = "h3 fw-bold border-bottom w-50">Basic Information</p>
+        <div class = "mb-2">
+          <div class = "row">
+            <div class = "mb-2">
+            <%= form.label :fname, "Your first name "%>            <%= form.text_field :fname%>
 
+              <% @inquiry.errors.full_messages_for(:fname).each do |message|%>
+                <div> <%=message%> </div>
+              <%end %>
+            </div>
+          </div>
 
-    <div>
-      <%= form.label :lname, "Your last name" %> <br>
-      <%= form.text_field :lname %><br>
-      <% @inquiry.errors.full_messages_for(:lname).each do |message| %>
-        <div> <%=message%> </div>
-      <% end %>
-    </div>
-    <br>
+          <div class = "mb-2">
+            <%= form.label :lname, "Your last name" %>
+            <%= form.text_field :lname %>
+            <% @inquiry.errors.full_messages_for(:lname).each do |message| %>
+              <div> <%=message%> </div>
+            <% end %>
+          </div>
+          <div class = "mb-2">
+            <%=form.label :mname, "Your middle name (if applicable)" %>
+            <%= form.text_field :mname %>
+             <% @inquiry.errors.full_messages_for(:lname).each do |message| %>
+              <div> <%=message%> </div>
+            <% end %>
 
-    <div>
-      <%=form.label :mname, "Your middle name (if applicable)" %> <br>
-      <%= form.text_field :mname %><br>
-       <% @inquiry.errors.full_messages_for(:lname).each do |message| %>
-        <div> <%=message%> </div>
-      <% end %>   
-    </div>
-    <div>
-        <p> "Are you a Canadian Citizen?" </p>
-        <%= form.radio_button :is_Canadian, "1" %>
-        <%= form.label :is_Canadian, "I am a Canadian Citizen"%>
-        <br>
-        <div>
-          <%= form.radio_button :is_Canadian, "0" %>
-          <%= form.label :is_Canadian, "I am not a Canadian Citizen"%>
-          <br>
-          <div id = "english-test-written" style = "display: none">
-           <%= form.label :english_written_test, "Have you completed a recognized Enlish test?" %>
-           <%=form.text_field :english_written_test %>
+            <div class = "mt-2">
+              <%=form.label :DOB, "Please enter your date of birth!" %>
+              <%=form.date_select :DOB, start_year: 1930  %>
+            </div>
+
           </div>
         </div>
+        <div class = "mt-2">
+          <p> Are you fluent in English? | <a href = "#myModal" data-bs-toggle="modal" data-bs-target="#myModal">Why?</a></p>
+          <%= form.radio_button :is_Canadian, "1" %>
+          <%= form.label :is_Canadian, "I was born in Canada / I have passed an English Test"%>
+            <div>
+              <%= form.radio_button :is_Canadian, "0" %>
+              <%= form.label :is_Canadian, "I wasn't born in Canada / I haven't passed an English Test"%>
+            </div>
+        </div>
+      </div>
+
+      <div id = "education-history-section">
+        <p class = "h3 fw-bold border-bottom w-50">Education History</p>
+        <div class="container">
+          <div class="accordion w-50 " id="accordionExample">
+            <!-- Education One -->
+            <div class="accordion-item border-bottom">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Do you have education to report?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse border-bottom" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <!-- Content for Education One -->
+                  <div id = "first-education-fields" class = "row justify-content-end">
+                    <div class = "col-md-6 mb-3">
+                    <%= form.label :education_one_level, "What level of education is it?"%>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                    <%= form.text_field :education_one_level%>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                    <%= form.label :education_one_school_name, "Whats the name of the school?" %>
+                    </div>
+                      <div class = "col-md-6 mb-3">
+                    <%= form.text_field :education_one_school_name %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                    <%= form.label :education_one_degree_name, "What is the degree name?" %>
+                    </div>
+                      <div class = "col-md-6 mb-3">
+                    <%= form.text_field :education_one_degree_name %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                    <%= form.label :education_one_start_date, "When did you start this education?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                    <%= form.date_select :education_one_start_date, start_year: 1950 %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                    <%= form.label :education_one_end_date, "When did you end this education?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                    <%= form.date_select :education_one_end_date, start_year: 1950 %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_one_gpa, "What was your GPA?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                    <%= form.text_field :education_one_gpa %>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!-- Education Two-->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Second Education to Report
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <!-- Content for Education 2 -->
+                  <div id = "second-education-fields" class = "row justify-content-end">
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_two_level, "What level of education is it?"%>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.text_field :education_two_level%>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_two_school_name, "Whats the name of the school?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.text_field :education_two_school_name %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_two_degree_name, "What is the degree name?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.text_field :education_two_degree_name %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_two_start_date, "When did you start this education?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.date_select :education_two_start_date, start_year: 1950 %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_two_end_date, "When did you end this education?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.date_select :education_two_end_date, start_year: 1950 %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_two_gpa, "What was your GPA?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.text_field :education_two_gpa %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Education 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Third Education to Report
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <!-- Content for Education 3-->
+                  <div id = "third-education-fields" class = "row justify-content-end">
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_three_level, "What level of education is it?"%>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.text_field :education_three_level%>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_three_school_name, "Whats the name of the school?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.text_field :education_three_school_name %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_three_degree_name, "What is the degree name?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.text_field :education_three_degree_name %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_three_start_date, "When did you start this education?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.date_select :education_three_start_date, start_year: 1950 %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_three_end_date, "When did you end this education?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.date_select :education_three_end_date, start_year: 1950 %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.label :education_three_gpa, "What was your GPA?" %>
+                    </div>
+                    <div class = "col-md-6 mb-3">
+                      <%= form.text_field :education_three_gpa %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+
+
+
+        <div id = "work-history-section">
+          <p class = "h3 border-bottom fw-bold mt-2 w-50"> Work History</p>
+          <div>
+          <%=form.label :job_role, "Please list your most recent job title"%>
+            <%=form.text_field :job_role, class: 'ms-5 w-25'%>
+          </div>
+          <div>
+            <%= form.label :job_description, "Please give a brief description of what you did in that role" %>
+            <br>
+            <%=form.text_area :job_description, class: 'w-50', rows:3 %>
+          </div>
+          <div>
+            <%=form.label :job_experience_one_start_date, "When did you start and end that job?" %>
+            <div>
+              <p>Start Date: <%=form.date_select :job_experience_one_start_date, start_year: 1950 %> </p>
+              <p>End date: <%=form.date_select :job_experience_one_end_date, start_year: 1950 %></p>
+            </div>
+          </div>
+          <div id = "additional-information-section">
+            <p class = "h3 fw-bold border-bottom w-50"> Additional Information</p>
+            <div>
+              <%= form.label :aboutMe, "Tell us a little bit about yourself, why are you applying?" %>
+              <%= form.text_area :aboutMe, class: 'form-control w-50', rows:4  %>
+            </div>
+          </div>
+          <div>
+            <p><%=form.label :skills, "Tell us about the skills that you have" %></p>
+            <%=form.text_area :skills, class: 'form-control w-50', rows:5 %>
+          </div>
+          <div>
+            <%=form.label :interests, "Tell us about your interests" %>
+            <br>
+            <%=form.text_area :interests, class: 'form-control w-50', rows:5 %>
+          </div>
+        </div>
+      </div>
+      <div id = "file-upload-section">
+        <p class = "h3 fw-bold border-bottom w-50">File upload</p>
+        <p class = "h6 fw-bold"> Please upload your resume, cover letter, transcript and valid English test result (if applicable) </p>
+        <p class = "h6 fw-bolder text-danger">NOTE: THE FILES MUST BE PDF/WORD</p>
+
+        <!-- Commented out for testing -->
+        <!--<%= form.file_field :files , multiple:true, id: "file-input"%> -->
+        <div class = "row">
+          <div>
+            <span>Upload Resume Here</span>
+            <%= form.file_field :resume %>
+          </div>
+          <div>
+            <span>Upload Cover Letter Here</span>
+            <%= form.file_field :cv_letter %>
+          </div>
+          <div>
+            <span>Upload Latest transcript Here</span>
+            <%= form.file_field :transcript %>
+          </div>
+          <div>
+            <span>Upload a valid English Test Here</span>
+            <%= form.file_field :english_test %>
+          </div>
+        </div>
+        <div id = "selected-files">
+
+        </div>
+      </div>
+      <div class = "mt-2">
+        <div class = "alert alert-info w-50">
+          <p>I confirm that the information is correct in this form <br>I understand I can not make changes after submitting</p>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              I understand
+            </label>
+          </div>
+        </div>
+        <%=form.submit "Submit", class: 'btn btn-dark'%>
+      </div>
+  <% end %>
     </div>
-    <br>
-    <br>
-    <div>
-      <h1 style="font-style: italic">Education</h1>
-      <h3>First Education</h3>
-      <div>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Why do I have to give this information? </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+           We would like to see if you are able to speak english or not as that is the standard in Canada, please attach a pdf
+            of a recognized Canadian English test.<br>
+            The two recognized tests are:
+            <ul>
+              <li>
+                International English Language Testing system (IELTS)
+              </li>
+              <li>
+                Canadian English Language Proficiency Index Program (CELPIP)
+              </li>
+            </ul>
 
-
+          </p>
+        </div>
       </div>
     </div>
-    <div>
-      <h2> Personal Items </h2>
-      <%= form.label :aboutMe, "Who are you? Tell us about yourself!" %>
-      <br>
-      <%= form.text_field :aboutMe %>
-    </div>
+  </div>
+</div>
 
-    <div>
-      <%= form.label :file, style: "display: block"%>
-      <%= form.file_field :file %>
-    </div>
-  <br>
-    <div>
-      <%=form.submit%>
-    </div>
-<% end %>
+<!-- This just displays the name of the files that the user uploaded so that they know
+      that they have uploaded the right files -->
+<script>
+    $(document).on('change', '#file-input', function() {
 
+        var files = $(this)[0].files;
+        var filesList = $('#selected-files');
+
+        filesList.empty(); // Clear the list before appending new files
+
+        for (var i = 0; i < files.length; i++) {
+            filesList.append('<p class = "fw-italic text-info">' + files[i].name + '</p>');
+        }
+    });
+</script>

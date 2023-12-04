@@ -1,23 +1,49 @@
-<%= stylesheet_link_tag('main')%>
-<h1> Welcome to Easeply (An Application Service) </h1>
+<head>
+  <title> capstone project</title>
+  <%= stylesheet_link_tag('main')%>
+  <style>
+      #background {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          min-width: 100%;
+          min-height: 100%;
+          width: 100%;
+          height: auto;
+          z-index: -1;
+          -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+          background-size: cover;
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+      }
+  </style>
+</head>
 
-<div class = "container">
-  <a href="/inquiries/new">
-    <div>
-      <div class = "box"> 
-          <h2> Are you a student here to apply? </h2>
-          <p> Click here! </p>
-      </div>
-    </div>
-  </a>
-
-
-  <a href = "/admin">
-    <div>
-      <div class = "box">
-        <h2> Adminstrator login </h2>
-        <p> Login here </p>
-      </div>
-    </div>
-  </a>
+<body style = "overflow:hidden">
+<div id = "background">
+  <%= video_tag( 'bg.mp4', id: 'background', autoplay: true, loop: true, muted: true)%>
 </div>
+<div class = 'container'>
+  <div class="d-flex justify-content-center align-items-center text-center" style="min-height: 100vh;">
+      <div class="row">
+        <div class="col-lg-12 mx-auto ">
+          <div class = "card bg-dark text-light p-4">
+            <h1 class="mb-4 h1 fw-bold text-light">Welcome to Easeply</h1>
+            <p class="lead h3 fw-bold text-light mb-4"> A student application service!<br> Please login or create an account to continue!</p>
+            <a class="btn btn-dark btn-lg border mb-2" href="/sign_in">Login</a>
+            <a class="btn btn-dark btn-lg border" href="/sign_up">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<script>
+  setTimeout(function() {
+    document.querySelectorAll('.alert').forEach(function(alert) {
+          alert.style.display = 'none';
+      });
+  }, 5000);
+</script>
+
+
+</body>

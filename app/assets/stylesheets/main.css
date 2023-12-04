@@ -1,19 +1,9 @@
-.box {
-	padding: 10px;
-	border: 5px solid blue;
-	margin: 5px;
-}
-
-.box:hover {
-	background-color:#808080;
-	cursor:pointer;
-
-
-}
-
-.container {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+#background {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 1;
+    background-size: auto;
 }
