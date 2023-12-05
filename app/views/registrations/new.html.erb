@@ -43,6 +43,7 @@
         </div>
 
       </div>
+      <!-- Image on right side of screen -->
       <div class="col-sm-6 px-0 d-none d-sm-block">
         <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=2873&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
              alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
@@ -51,9 +52,10 @@
   </div>
   <script>
       document.addEventListener('DOMContentLoaded', function() {
-          // Clear the form fields
+          // Clear the form fields if page refreshes/error occurs (taken username)
           document.getElementById('user_username').value = '';
           document.getElementById('user_password').value = '';
+          document.getElementById('user_email').value = '';
       });
   </script>
 </section>

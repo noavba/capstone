@@ -1,13 +1,7 @@
 class InquiriesController < ApplicationController
   def index
-    @inquiries = if params[:search].present?
-                   Inquiry.where(
-                     'field1 LIKE :search OR field2 LIKE :search OR field3 LIKE :search',
-                     search: "%#{params[:search]}%"
-                   )
-                 else
-                   Inquiry.all
-                 end
+    @inquiries = Inquiry.all
+
   end
 
   def show
@@ -19,13 +13,17 @@ class InquiriesController < ApplicationController
   end
 
   def create
+    #create a new inquiry if user clicks submit on application (must have the parameters below)
     @inquiry = Inquiry.new(inquiry_params)
+    #linking user to inquiry (1 inquiry per user is permitted)
     @inquiry.user = Current.user
 
     ## uses validate code from app/model/inquiry.rb - validates that only one user has one inquiry, throws error if they do
     if @inquiry.valid?
       if @inquiry.save
+        #delivers email to inquiry user that theyve submitted an application
         UserMailer.with(user: @inquiry.user).user_application_email.deliver_now
+        #delivers email to admin to say a user has submitted an application
         UserMailer.admin_application_email.deliver_now
         redirect_to root_path
         flash[:notice] = "Successfully submitted application"
@@ -40,7 +38,7 @@ class InquiriesController < ApplicationController
   end
 
   private
-
+  #inquiry params, every column in the database
   def inquiry_params
     params.require(:inquiry).permit(:fname, :lname, :mname, :is_Canadian, :written_english_test, :aboutMe, :files, :DOB,
                                     :education_one, :education_one_level, :education_one_start_date, :education_one_end_date,

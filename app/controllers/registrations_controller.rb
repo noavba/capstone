@@ -9,8 +9,10 @@ class RegistrationsController < ApplicationController
   end
 
   def create
+    #create new user based on params (email, username, password, password digest)
     @user = User.new(user_params)
     if @user.save
+      #email welcome email to user upon successful account creation
       UserMailer.with(user: @user).welcome_email.deliver_now
       session[:user_id] = @user.id
       redirect_to root_path, notice: "Successfully created an account, Thank you"

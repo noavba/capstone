@@ -35,7 +35,7 @@
               <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#inquiryModal<%=inquiry.id %>">
                 View Inquiry
               </button>
-              <!-- Modal  CODE - I TRIED TO USE A PARTIAL BUT IT WOULDNT WORK, MODEL WOULDNT COMMUNICATE TO IT.-->
+              <!-- MODAL CODE TO CREATE A MODAL TO VIEW THE APPLICATIONS (INCREMENTS BY INQUIRY_ID throughout the TABLE -->
               <div class="modal modal-lg fade" id="inquiryModal<%=inquiry.id %>" tabindex="-1" aria-labelledby="inquiryModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
@@ -46,7 +46,7 @@
                     <div class="modal-body">
 
                       <div class="border row">
-
+                        <!-- DISPLAYS INFO IN ROWS-->
                         <div class = "col-6">
                           <p class = "fw-bold h2"> Basic Information</p>
                           <p>
@@ -152,7 +152,7 @@
                       <div class = "mb-2">
                         <div class = "mb-2 fw-bold">
                           <div>
-                            <!-- NEED TO FINISH AND IMPLEMENT LOGIC -->
+                            <!-- FILE SECTION - IF ITS ATTACHED DISPLAY LINK, IF NOT THEN SAY NOTHINGS ATTACHED-->
                             <% if inquiry.resume.attached? %>
                               <p><strong>Resume:</strong> <%= link_to inquiry.resume.filename, rails_blob_path(inquiry.resume, disposition: "attachment") %></p>
                             <% else %>
@@ -264,15 +264,14 @@
     </div>
     <div class = "sidebar">
       <div>
-        <div class = "border mt-5 me-3 ">
+        <div class = "mt-5 me-3 ">
+          <div class = "card bg-dark text-light p-4 mb-4">
           <label for="searchInput" class="form-label">Search Users </label>
           <input type="text" class="form-control mb-6" id="searchInput" placeholder="Search Users">
-          <div>
-            <label for="searchInput2" class="form-label mt-6">Search Resume, CV, & Transcript</label>
+          </div>
+          <div class = "card bg-dark text-light p-4">
+            <label for="searchInput2" class="form-label">Search Resume, CV, & Transcript</label>
             <input type="text" class="form-control" id="searchInput2" placeholder="Skills Search">
-            <div>
-              <button class = "btn btn-dark mt-2 mb-2 ms-4"> Search Parsed Text</button>
-            </div>
           </div>
         </div>
       </div>

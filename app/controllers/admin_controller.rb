@@ -5,6 +5,7 @@ class AdminController < ApplicationController
   end
 
   private
+  #only user account named admin can view this page
   def authorize_user
     unless Current.user && Current.user.username == "admin"
       flash[:alert] = " You are not authorized to view this page"

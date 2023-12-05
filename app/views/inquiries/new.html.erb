@@ -2,7 +2,7 @@
 
 <div class = "d-flex h-100">
   <div class="flex-shrink-0 p-3" style="width: 200px; background-color: #f8f9fa;">
-    <!-- Content for the slim box goes here -->
+    <!--side nav bar-->
     <h3>Quick Navigation</h3>
     <ul>
       <li>
@@ -277,8 +277,7 @@
         <p class = "h6 fw-bold"> Please upload your resume, cover letter, transcript and valid English test result (if applicable) </p>
         <p class = "h6 fw-bolder text-danger">NOTE: THE FILES MUST BE PDF/WORD</p>
 
-        <!-- Commented out for testing -->
-        <!--<%= form.file_field :files , multiple:true, id: "file-input"%> -->
+       <!-- handles file uploads -->
         <div class = "row">
           <div>
             <span>Upload Resume Here</span>
@@ -342,19 +341,3 @@
     </div>
   </div>
 </div>
-
-<!-- This just displays the name of the files that the user uploaded so that they know
-      that they have uploaded the right files -->
-<script>
-    $(document).on('change', '#file-input', function() {
-
-        var files = $(this)[0].files;
-        var filesList = $('#selected-files');
-
-        filesList.empty(); // Clear the list before appending new files
-
-        for (var i = 0; i < files.length; i++) {
-            filesList.append('<p class = "fw-italic text-info">' + files[i].name + '</p>');
-        }
-    });
-</script>
