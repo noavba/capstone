@@ -20,6 +20,7 @@ class InquiriesController < ApplicationController
 
     ## uses validate code from app/model/inquiry.rb - validates that only one user has one inquiry, throws error if they do
     if @inquiry.valid?
+      #@inquiry.save is when they click the submit button on their application
       if @inquiry.save
         #delivers email to inquiry user that theyve submitted an application
         UserMailer.with(user: @inquiry.user).user_application_email.deliver_now
@@ -28,9 +29,11 @@ class InquiriesController < ApplicationController
         redirect_to root_path
         flash[:notice] = "Successfully submitted application"
       else
+        #render the homepage if error throws & tell them that theres been an error
         render :new, status: :unprocessable_entity
       end
     else
+      #if user has already created an inquiry, throw error and send them back to main page
       redirect_to root_path
       flash[:alert] = "Error, You already created a application"
     end

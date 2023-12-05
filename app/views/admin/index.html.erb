@@ -209,6 +209,7 @@
                       <div class = "border mb-2">
                       <span class = "h3 fw-bold"> Resume Text</span>
                         <div>
+                          <!-- If file is attached display it, if not display no attached -->
                         <% if inquiry.resume.attached? %>
                           <%=Inquiry.extract_text_from_pdf(inquiry.resume) %>
                         <% else %>

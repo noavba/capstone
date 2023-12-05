@@ -23,10 +23,13 @@
 
   <body>
     <div>
+      <!-- Keeps navbar loaded on every part of the application-->
       <%=render(partial: "shared/navbar") %>
       <div class = "container">
+        <!-- Keeps the code for alerts & flashes loaded at all times in case called by the program-->
         <%=render partial: "shared/flash" %>
       </div>
+      <!-- Yield displays whatever needs to be loaded by the views (so like Mainpage, etc)-->
       <%= yield %>
     </div>
   </body>
